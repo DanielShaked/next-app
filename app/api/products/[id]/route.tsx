@@ -5,7 +5,7 @@ import { prisma } from "@/prisma/client";
 
 
 export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
-    const product = await prisma.products.findUnique({
+    const product = await prisma.product.findUnique({
         where: { id: +params.id }
     })
     if (!product)
@@ -19,12 +19,12 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     const validation = schema.safeParse(body)
     if (!validation.success)
         return NextResponse.json(validation.error.errors, { status: 400 })
-    const product = await prisma.products.findUnique({
+    const product = await prisma.product.findUnique({
         where: { id: +params.id }
     })
     if (!product)
         return NextResponse.json({ error: 'product not found' }, { status: 404 })
-    const updatedProduct = await prisma.products.update({
+    const updatedProduct = await prisma.product.update({
         where: { id: product.id },
         data: {
             ...product,
@@ -39,11 +39,11 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
 export async function DELETE(request: NextRequest,
     { params }: { params: { id: string } }) {
 
-    const product = await prisma.products.findUnique({
+    const product = await prisma.product.findUnique({
         where: { id: +params.id }
     })
     if (!product) return NextResponse.json({ error: 'product not found' }, { status: 404 })
-    await prisma.products.delete({
+    await prisma.product.delete({
         where: { id: product.id }
     })
     return NextResponse.json({})
