@@ -1,28 +1,26 @@
 import axios from 'axios'
-import React from 'react'
+import React, { Suspense } from 'react'
+import UserTable from './UserTable'
+import Link from 'next/link'
 
-interface User {
-    id: number;
-    name: string;
 
+interface Props {
+    searchParams: { sortOrder: string }
 }
 
-const UserPage = async () => {
+const UsersPage = async ({ searchParams: { sortOrder } }: Props) => {
 
-    const res = await fetch('https://jsonplaceholder.typicode.com/users', {
-        next: { revalidate: 10 }
-    })
-    const users: User[] = await res.json()
+
 
 
     return (
         <>
             <h1>Users!</h1>
-            <ul>
-                {users.map(user => <li key={user.id}>{user.name}</li>)}
-            </ul>
+            <Link href='/users/new' className='btn btn-primary'>New User</Link>
+            <Suspense fallback={<p>Loading...</p>}></Suspense>
+            <UserTable sortOrder={sortOrder} />
         </>
     )
 }
 
-export default UserPage
+export default UsersPage
