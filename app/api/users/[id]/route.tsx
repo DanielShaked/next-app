@@ -33,8 +33,6 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
             email: body.email
         }
     })
-
-
     return NextResponse.json(updatedUser)
 }
 

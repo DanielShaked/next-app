@@ -4,7 +4,7 @@ import { Inter } from 'next/font/google'
 import Link from 'next/link'
 import NavBar from './NavBar'
 import { Suspense } from 'react'
-import { error } from 'console'
+import AuthProvider from './auth/Provider'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -23,13 +23,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <NavBar />
-        <main>
-          {/* <Suspense fallback={<span>Loading...</span>}> */}
-          {children}
-          {/* </Suspense> */}
-        </main>
+        <AuthProvider>
+          <NavBar />
+          <main>
+            {/* <Suspense fallback={<span>Loading...</span>}> */}
+            {children}
+            {/* </Suspense> */}
+          </main>
+        </AuthProvider>
+
       </body>
-    </html>
+    </html >
   )
 }

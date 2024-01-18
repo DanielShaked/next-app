@@ -8,19 +8,13 @@ interface Props {
     searchParams: { sortOrder: string }
 }
 
-const UsersPage = async ({ searchParams: { sortOrder } }: Props) => {
-
-
-
-
-    return (
-        <>
-            <h1>Users!</h1>
-            <Link href='/users/new' className='btn btn-primary'>New User</Link>
-            <Suspense fallback={<p>Loading...</p>}></Suspense>
-            <UserTable sortOrder={sortOrder} />
-        </>
-    )
-}
+const UsersPage = async ({ searchParams: { sortOrder } }: Props) => (
+    <>
+        <h1>Users!</h1>
+        <Link href='/users/new' className='btn btn-primary'>New User</Link>
+        <Suspense fallback={<p>Loading...</p>}></Suspense>
+        {/* <UserTable sortOrder={sortOrder} /> */}
+    </>
+)
 
 export default UsersPage
